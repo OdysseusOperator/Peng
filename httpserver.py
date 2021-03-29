@@ -7,6 +7,20 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
+
+@app.route('/search/', methods=['POST', 'GET'])
+def search():
+    error = None
+    if request.method == 'POST':
+        if request.form['search'] :
+            #return redirect("http://www.bing.com/search?q="+request.form['search'])
+            return render_template('search.html',result="http://www.bing.com/search?q="+request.form['search']) 
+        else:
+            error = 'Search'
+            return 'error boy'+request.form['search'] 
+    # the code below is executed if the request method
+    # was GET or the credentials were invalid
+    return render_template('search.html')    
     
 @app.route('/hello/')
 @app.route('/hello/<name>')
@@ -28,7 +42,7 @@ def login():
     return render_template('login.html', error=error)
     
 def log_the_user_in(S):
-    return redirect("http://www.example.com", code=302)
+    return redirect("/hello/"+S)
     
 def valid_login(name,pw):
     return True

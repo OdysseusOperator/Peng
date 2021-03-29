@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Flask Intro - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <h1>search</h1>
+      <br>
+      <form action="" method="post">
+        <input type="text" placeholder="Search" name="search" value="{{
+          request.form.search }}">
+        <input class="btn btn-default" type="submit" value="Login">
+      </form>
+    </div>
+    {% if result %}
+        <iframe src={{result}} height="200" width="300" title="Iframe Example"></iframe>
+    {% endif %}
+  </body>
+</html>
+
