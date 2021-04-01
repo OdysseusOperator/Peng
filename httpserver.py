@@ -12,7 +12,7 @@ def search():
     if request.method == 'POST':
         if request.form['search'] :
             #return redirect("http://www.bing.com/search?q="+request.form['search'])
-            result="http://www.bing.com/search?q="+build_link(request.form['search'])
+            result=pullHtml(build_link(request.form['search']))
             return render_template('search.html',result=result)
         else:
             error = 'Search'
@@ -29,12 +29,16 @@ def build_link(formString):
     	    search = w
     	else:
     	    search = search + "+" + w
+    search = "http://www.bing.com/search?q="+search+"&form=QBRE"
     return search
 
-def pullHtml():
-    source = requests.get('https://webscraper.droppages.com/').text
+def pullHtml(url):
+    headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+    source = requests.get(url,headers=headers).text
     soup = BeautifulSoup(source, 'lxml')
-    return(soup)
+
+    mydivs = soup.find_all("li", {"class": "b_algo"})
+    return mydivs
 
 
 def prepare():

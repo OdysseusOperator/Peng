@@ -15,7 +15,9 @@
       </form>
     </div>
     {% if result %}
-        <iframe src={{result}} height=83% width=100% title="Iframe Example"></iframe>
+        <div>
+        	{{result|safe }}
+        </div>
     {% endif %}
   </body>
 </html>
