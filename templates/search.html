@@ -1,24 +1,33 @@
 <html>
   <head>
-    <title>Flask NoFap Search</title>
+    <title>Detox Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
   </head>
   <body>
-    <div class="container">
+    <div class="header">
       <h1>search</h1>
       <br>
       <form action="" method="post">
         <input type="text" placeholder="Search" name="search" value="{{
           request.form.search }}">
-        <input class="btn btn-default" type="submit" value="Login">
+        <input class="btn btn-default" type="submit" value="search">
       </form>
     </div>
-    {% if result %}
-        <div>
+    <div class="row">
+      <div class="column side">
+        <h2>Side</h2>
+        <p>Be productive or make a break from PC.</p>
+      </div>
+      
+      <div class="column middle">
+        {% if result %}
         	{{result|safe }}
-        </div>
-    {% endif %}
+        {% endif %}
+      </div>
+      
+    </div>
+
   </body>
 </html>
 
