@@ -2,17 +2,20 @@ from flask import Flask
 from flask import Flask, render_template, redirect, url_for, request
 from bs4 import BeautifulSoup
 import requests
+import time
 
 blacklist_lines = []
 names_lines = []
 
+timestamp = 0
+timeout_sec = 60
 
 def read_lower_lines(filepath):
     lines = []
     with open(filepath, 'r') as fileinput:
         for line in fileinput:
-            line = line.lower()   
-            lines.append(line)
+            line = line.lower()
+            lines.append(line.rstrip('\n'))
     return lines
 
 def prepare():
@@ -41,13 +44,19 @@ def get_search_body(url):
     return mydivs
 
 
+def html_body(url):
+    divList = get_search_body(url)
+    sb = ""
+
+    for div in divList:
+        sb = sb + str(div)
+    return sb
+
 def isBlocked(words):
     words = words.lower()
     words = words.split()
     #search for easy blocked words
     for word in words:
-        print(word)
-        print(blacklist_lines)
         if word in blacklist_lines:
             return True
  
@@ -62,29 +71,43 @@ def isBlocked(words):
             return True
     return False
         
-        
-    
-
+               
 
 prepare()
-print(blacklist_lines)
 app = Flask(__name__)
+
 
 @app.route('/search', methods=['POST', 'GET'])
 @app.route('/', methods=['POST', 'GET'])
 def search():
+    now = time.time() - timestamp
+    if (now < timeout_sec and timestamp > 0):
+        return redirect(url_for('wait'))
     error = None
     if request.method == 'POST':
         if request.form['search'] :
             if isBlocked(request.form['search']):
-                return redirect(url_for('search'))#Should add imidiate punishment
+                return redirect(url_for('wait'))#Should add imidiate punishment
             else:
-                result=get_search_body(build_link(request.form['search']))
+                result=html_body(build_link(request.form['search']))
                 return render_template('search.html',result=result)
         else:
             error = 'Search'
             return 'error boy'+request.form['search'] 
-    # the code below is executed if the request method
-    # was GET or the credentials were invalid
+
+    # the code below is executed if the request method is Get
+    if request.args.get('q'):
+        arg = request.args.get('q')
+        print(arg)
+        if isBlocked(arg):
+                return redirect(url_for('wait'))#Should add imidiate punishment
+        else:
+            result=html_body(build_link(arg))
+            return render_template('search.html',result=result)
     return render_template('search.html')    
    
+@app.route('/wait')
+def wait():
+    global timestamp
+    timestamp = time.time()
+    return render_template('search.html',result="you have been blocked for (another)..." + str(timeout_sec) + "seconds")
