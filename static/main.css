@@ -3,33 +3,12 @@ body {
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
-  background-color: lightblue;
+  background-color: rgb(181, 209, 228);
   overflow:auto;
-}
-/*
- * Formatting the header area
- */
-header {
-  background-color: #DFB887;
-  height: 35px;
-  width: 100%;
-  opacity: .9;
-  margin-bottom: 10px;
-}
-header h1.logo {
-  margin: 0;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  float: left;
-}
-header h1.logo:hover {
-  color: #fff;
-  text-decoration: none;
 }
 
 li {
-  background-color: lightblue;
+  background-color: rgb(200, 217, 228);
 }
 
 h2 {
@@ -56,9 +35,10 @@ h3 {
 
 /* Style the header */
 .header {
-  background-color: #f1f1f1;
+  background-color: #412cb8;
   padding: 20px;
-  text-align: center;
+  width: 100%;
+  display: inline-block;
 }
 
 /* Style the top navigation bar */
@@ -91,12 +71,12 @@ h3 {
 
 /* Left and right column */
 .column.side {
-  width: 25%;
+  width: 18.5%;
 }
 
 /* Middle column */
 .column.middle {
-  width: 50%;
+  width: 65%;
 }
 
 /* Clear floats after the columns */
@@ -112,4 +92,62 @@ h3 {
     width: 100%;
   }
 }
+
+/* clears those anoying bullets */
+ul, li {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+form input{
+  font-size: 1.8em;
+}
+
+cite{
+  visibility: hidden;
+  font-size: 0px;
+}
+
+.b_algo{
+  border: 2px solid rgb(155, 150, 150);
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  padding: 10px;
+}
+/*  Link colours  */
+/* unvisited link */
+a:link {
+  color: blue;
+}
+/* visited link */
+a:visited {
+  color: blue;
+}
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+/* selected link */
+a:active {
+  color: blue;
+}
+#detox_search{
+  font-size: 3em;
+  text-align: left;
+  color: #706247;
+  display:inline;
+}
+#detox_search_btn{
+  font-size: 3em;
+  display:inline;
+}
+#detox_form{
+  display: inline;
+  float: right;
+  margin-right: 30px;
+}
+#detox_input{
+  font-size: 3em;
+}
+
 

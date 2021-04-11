@@ -6,18 +6,15 @@
   </head>
   <body>
     <div class="header">
-      <h1>search</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="Search" name="search" value="{{
+      <h2 id="detox_search">Detox Search</h2>
+      <form id="detox_form" action="" method="post">
+        <input id="detox_input" type="text" placeholder="..." name="search" value="{{
           request.form.search }}">
-        <input class="btn btn-default" type="submit" value="search">
+        <input id="detox_search_btn" class="btn btn-default" type="submit" value=">>">
       </form>
     </div>
     <div class="row">
       <div class="column side">
-        <h2>Side</h2>
-        <p>Be productive or make a break from PC.</p>
       </div>
       
       <div class="column middle">

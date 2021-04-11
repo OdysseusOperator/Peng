@@ -3,12 +3,14 @@ from flask import Flask, render_template, redirect, url_for, request
 from bs4 import BeautifulSoup
 import requests
 import time
+import re
 
 blacklist_lines = []
 names_lines = []
 
 timestamp = 0
 timeout_sec = 60
+url_pattern = '(http|https):\/\/([\w\-_]+(?:(?:\.[\w\-_]+)+))([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?'
 
 def read_lower_lines(filepath):
     lines = []
@@ -32,6 +34,7 @@ def build_link(formString):
     	    search = w
     	else:
     	    search = search + "+" + w
+    #&first=X
     search = "http://www.bing.com/search?q="+search+"&form=QBRE"
     return search
 
@@ -46,11 +49,14 @@ def get_search_body(url):
 
 def html_body(url):
     divList = get_search_body(url)
-    sb = ""
+    string = ""
 
     for div in divList:
-        sb = sb + str(div)
-    return sb
+        string = string + str(div)
+    #string = re.sub('<cite>(http|https):\/\/([\w\-_\\])+<\cite>',"",string)
+    regex = r"<a [a-zA-Z0-9%=;&\-\"_\\.\?\/: ,]*>Diese Seite übersetzen<\/a>"
+    string = re.sub(regex,'',string)
+    return string
 
 def isBlocked(words):
     words = words.lower()
@@ -106,8 +112,18 @@ def search():
             return render_template('search.html',result=result)
     return render_template('search.html')    
    
-@app.route('/wait')
+@app.route('/wait',methods=['POST', 'GET'])
 def wait():
     global timestamp
     timestamp = time.time()
-    return render_template('search.html',result="you have been blocked for (another)..." + str(timeout_sec) + "seconds")
+    if request.method == 'POST':
+        return render_template('search.html',result="you have been blocked for (another)..." + str(timeout_sec) + "seconds")
+    else:
+        return render_template('search.html',result="you have been blocked for (another)..." + str(timeout_sec) + "seconds")
+
+#@app.before_request
+#def before_request():
+#    if request.url.startswith('http://'):
+#        url = request.url.replace('http://', 'http://', 1)
+#        code = 301
+#        return redirect(url, code=code)
