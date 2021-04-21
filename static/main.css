@@ -3,12 +3,12 @@ body {
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
-  background-color: rgb(181, 209, 228);
+  background-color: #1A3E4C;
   overflow:auto;
 }
 
 li {
-  background-color: rgb(200, 217, 228);
+  background-color: #C2DFEB;
 }
 
 h2 {
@@ -35,33 +35,14 @@ h3 {
 
 /* Style the header */
 .header {
-  background-color: #412cb8;
-  padding: 20px;
+  background-color: #347B98;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
   width: 100%;
   display: inline-block;
 }
 
-/* Style the top navigation bar */
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-/* Style the topnav links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
 
 /* Create three unequal columns that floats next to each other */
 .column {
@@ -117,29 +98,31 @@ cite{
 /*  Link colours  */
 /* unvisited link */
 a:link {
-  color: blue;
+  color: #347B98;
 }
 /* visited link */
 a:visited {
-  color: blue;
+  color: #347B98;
 }
 /* mouse over link */
 a:hover {
-  color: blue;
+  color: #347B98;
 }
 /* selected link */
 a:active {
-  color: blue;
+  color: #347B98;
 }
 #detox_search{
   font-size: 3em;
   text-align: left;
-  color: #706247;
+  color: #C2DFEB;
   display:inline;
 }
 #detox_search_btn{
   font-size: 3em;
   display:inline;
+  color:#C2DFEB;
+  background-color: #092834;
 }
 #detox_form{
   display: inline;
@@ -147,6 +130,7 @@ a:active {
   margin-right: 30px;
 }
 #detox_input{
+  background-color: #C2DFEB;
   font-size: 3em;
 }
 
