@@ -1,14 +1,46 @@
+/* Style the header */
+.header {
+  background-color: #347B98;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+#detox_search{
+  font-size: 3em;
+  text-align: left;
+  color: #C2DFEB;
+  display:inline;
+}
+#detox_search_btn{
+  font-size: 3em;
+  display:inline;
+  color:#C2DFEB;
+  background-color: #092834;
+}
+#detox_form{
+  display: inline;
+  float: right;
+  margin-right: 30px;
+}
+#detox_input{
+  background-color: #e2f6ff;
+  font-size: 3em;
+}
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #444;
-  background-color: #1A3E4C;
+  background-color: #dbf0f8;
   overflow:auto;
 }
 
 li {
-  background-color: #C2DFEB;
+  background-color: #f2fbff;
 }
 
 h2 {
@@ -31,16 +63,6 @@ h3 {
   text-align: center;
   padding: 16px;
   text-decoration: none;
-}
-
-/* Style the header */
-.header {
-  background-color: #347B98;
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  width: 100%;
-  display: inline-block;
 }
 
 
@@ -90,9 +112,9 @@ cite{
 }
 
 .b_algo{
-  border: 2px solid rgb(155, 150, 150);
-  border-radius: 15px;
-  -moz-border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  -moz-border-radius: 10px;
   padding: 10px;
 }
 /*  Link colours  */
@@ -112,26 +134,6 @@ a:hover {
 a:active {
   color: #347B98;
 }
-#detox_search{
-  font-size: 3em;
-  text-align: left;
-  color: #C2DFEB;
-  display:inline;
-}
-#detox_search_btn{
-  font-size: 3em;
-  display:inline;
-  color:#C2DFEB;
-  background-color: #092834;
-}
-#detox_form{
-  display: inline;
-  float: right;
-  margin-right: 30px;
-}
-#detox_input{
-  background-color: #C2DFEB;
-  font-size: 3em;
-}
+
 
 

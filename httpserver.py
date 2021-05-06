@@ -26,7 +26,7 @@ def prepare():
     global names_lines
     names_lines = read_lower_lines('./data/pornStarNames.txt')
 
-def build_link(formString):
+def build_link(formString,pages = 0):
     words = formString.split()
     search = ""
     for w in words:
@@ -35,7 +35,10 @@ def build_link(formString):
     	else:
     	    search = search + "+" + w
     #&first=X
-    search = "http://www.bing.com/search?q="+search+"&form=QBRE"
+    if (int(pages) > 0):
+        search = "http://www.bing.com/search?q="+search+"&form=QBRE"+"&first="+pages
+    else:
+        search = "http://www.bing.com/search?q="+search+"&form=QBRE"
     return search
 
 def get_search_body(url):
@@ -102,13 +105,17 @@ def search():
             return 'error boy'+request.form['search'] 
 
     # the code below is executed if the request method is Get
+    pages = 0
+    if(request.args.get('pages')):
+        pages = request.args.get('pages')
+    print(pages)
     if request.args.get('q'):
         arg = request.args.get('q')
         print(arg)
         if isBlocked(arg):
                 return redirect(url_for('wait'))#Should add imidiate punishment
         else:
-            result=html_body(build_link(arg))
+            result=html_body(build_link(arg,pages))
             return render_template('search.html',result=result)
     return render_template('search.html')    
    
@@ -120,10 +127,3 @@ def wait():
         return render_template('search.html',result="you have been blocked for (another)..." + str(timeout_sec) + "seconds")
     else:
         return render_template('search.html',result="you have been blocked for (another)..." + str(timeout_sec) + "seconds")
-
-#@app.before_request
-#def before_request():
-#    if request.url.startswith('http://'):
-#        url = request.url.replace('http://', 'http://', 1)
-#        code = 301
-#        return redirect(url, code=code)
