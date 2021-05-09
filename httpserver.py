@@ -59,6 +59,10 @@ def html_body(url):
     #string = re.sub('<cite>(http|https):\/\/([\w\-_\\])+<\cite>',"",string)
     regex = r"<a [a-zA-Z0-9%=;&\-\"_\\.\?\/: ,]*>Diese Seite übersetzen<\/a>"
     string = re.sub(regex,'',string)
+
+    regexForm = r"<form\s*.*>\s*.*<\/form>"
+    string = re.sub(regexForm,'',string)
+
     return string
 
 def isBlocked(words):
