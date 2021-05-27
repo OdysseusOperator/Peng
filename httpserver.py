@@ -35,10 +35,9 @@ def build_link(formString,pages = 0):
     	else:
     	    search = search + "+" + w
     #&first=X
-    if (int(pages) > 0):
-        search = "http://www.bing.com/search?q="+search+"&form=QBRE"+"&first="+pages
-    else:
-        search = "http://www.bing.com/search?q="+search+"&form=QBRE"
+    
+    search = "http://www.bing.com/search?q="+search+"&form=QBRE"+"&first="+str(pages)
+   
     return search
 
 def get_search_body(url):
@@ -50,7 +49,7 @@ def get_search_body(url):
     return mydivs
 
 
-def html_body(url):
+def filtered_html_body(url):
     divList = get_search_body(url)
     string = ""
 
@@ -63,6 +62,14 @@ def html_body(url):
     regexForm = r"<form\s*.*>\s*.*<\/form>"
     string = re.sub(regexForm,'',string)
 
+    i,j = 0,0
+    while(True):
+        print("im doing it")
+        prog = re.compile('.*')
+        result = prog.match(string)
+        print(result)
+        break
+    
     return string
 
 def isBlocked(words):
@@ -98,11 +105,34 @@ def search():
         return redirect(url_for('wait'))
     error = None
     if request.method == 'POST':
+        if request.form.get("next"):
+			# do something
+            if(request.args.get('pages')):
+                pages = request.args.get('pages')
+                pages = int(pages)
+                pages= pages + 7
+            else:
+                pages = 0
+            arg = request.args.get('q')
+            return redirect("/search?q=abc&pages="+str(pages))
+        elif request.form.get("prev"):
+            if(request.args.get('pages')):
+                pages = request.args.get('pages')
+                pages = int(pages)
+                pages= pages - 7
+                if pages < 0:
+                    pages =0
+            else:
+                pages = 0
+            arg = request.args.get('q')
+            return redirect("/search?q=abc&pages="+str(pages))
+
+
         if request.form['search'] :
             if isBlocked(request.form['search']):
                 return redirect(url_for('wait'))#Should add imidiate punishment
             else:
-                result=html_body(build_link(request.form['search']))
+                result=filtered_html_body(build_link(request.form['search']))
                 return render_template('search.html',result=result)
         else:
             error = 'Search'
@@ -119,7 +149,7 @@ def search():
         if isBlocked(arg):
                 return redirect(url_for('wait'))#Should add imidiate punishment
         else:
-            result=html_body(build_link(arg,pages))
+            result=filtered_html_body(build_link(arg,pages))
             return render_template('search.html',result=result)
     return render_template('search.html')    
    
