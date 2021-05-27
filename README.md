@@ -1,4 +1,4 @@
-# NoFapSearchPage
+# Beng        A SearchPage programm
 It will block some things of search results and should prevend users from getting into the cycle again.
 This app should be combined with other technologies, to be effective.
 
