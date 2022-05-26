@@ -35,3 +35,5 @@ FAQ
 
 Why use bing and not google in the backend ?
   • google has changed it page significantly in the past, bing just means lower mantainance for the code.
+  
+  Hello, can you hear me ?
