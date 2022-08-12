@@ -1,4 +1,7 @@
-# Beng        A SearchPage programm
+# Peng        
+A toy SearchEngine
+It basically uses Bing search
+
 It will block some things of search results and should prevend users from getting into the cycle again.
 This app should be combined with other technologies, to be effective.
 
@@ -34,6 +37,4 @@ http://127.0.0.1:5000/search?q=%s
 FAQ
 
 Why use bing and not google in the backend ?
-  • google has changed it page significantly in the past, bing just means lower mantainance for the code.
-  
-  Hello, can you hear me ?
+  • google has changed it page significantly in the past. Using bing  means lower mantainance effort for the code.
